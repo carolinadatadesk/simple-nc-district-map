@@ -1,0 +1,123 @@
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,400italic);
+
+body{
+  font-family:'Open Sans';
+}
+h1{
+  font-size:48px;
+  font-weight:bold;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.max-width{
+  max-width:900px;
+}
+
+
+.repubs:hover, .dems:hover{
+  opacity:.7;
+}
+
+.short-dem, .tall-dem{
+  opacity:0;
+}
+
+g.dems:hover .short-dem {
+  opacity:1;
+  fill:black;
+}
+
+g.dems:hover .tall-dem{
+  opacity:1;
+  fill:white;
+}
+
+.short-repub, .tall-repub{
+  opacity:0;
+}
+
+g.repubs:hover .short-repub {
+  opacity:1;
+  fill:black;
+}
+
+g.repubs:hover .tall-repub{
+  opacity:1;
+  fill:white;
+}
+
+.append{
+  border: solid 1px #eee;
+  border-bottom: solid 1px #ccc;
+  padding:20px;
+}
+
+.mini-map{
+  width:20%;
+  display:inline-block;
+}
+
+
+p{
+  font-size:14px;
+  line-height:22.4px;
+  text-align:left;
+}
+
+h3{
+  font-size:24px;
+  line-height: 24px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.tiny-text{
+  font-size:10pt;
+  margin-top:-5pt;
+  margin-left:15pt;
+  color:#767676;
+}
+
+.byline{
+  text-transform:uppercase;
+}
+
+.by{
+  text-transform: none;
+}
+
+h5{
+  font-weight: bold;
+}
+
+.graph-title{
+  text-align:center;
+  font-family:'Open Sans';
+  font-size:25pt;
+}
+
+.strong{
+  font-weight:bold;
+}
+
+/*this should fade it or something idk*/
+svg{
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+}
+
+
+footer{
+  text-align:center;
+}
