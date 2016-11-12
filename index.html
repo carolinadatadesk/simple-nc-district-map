@@ -38,7 +38,7 @@
   </footer>
 
 
-<script src="public/js/aca_map_with_pop.geojson"></script>
+<script src="public/js/aca_map_with_pop_medicaid.geojson"></script>
 
 <script>
 $(document).ready(function(){
@@ -51,35 +51,85 @@ $(document).ready(function(){
   }).addTo(map);
 
 
-
-  function onEachFeature(feature, layer) {
-      // var popupContent = feature.properties.PlanSelec;
-      var popupContent = "hi";
-
-      console.log(layer == null);
-
-      // if (feature.properties && feature.properties.PlanSelec) {
-      //   popupContent += feature.properties.PlanSelec;
-      // }
-
-      layer.bindPopup(popupContent);
-    }
+  var min = 200;
 
   L.geoJson(geojsonFeatures, {
     style: function (feature) {
-        return {color: "blue"};
+
+      var numer = feature.properties.PlanSelec;
+      var county = feature.properties.NAME_LOCAS;
+      var denom = feature.properties.EligibleFo;
+      var percent = numer/denom;
+      percent = Math.round(percent * 100);
+
+      if (percent < min )
+      {
+        min = percent;
+      }
+
+      if (percent <= 13) {
+          return {
+            "fillColor":"#edf8fb",
+            "weight": 1,
+            "fillOpacity": 1
+          };
+
+      } else if ( percent <= 33) {
+        return {
+          "fillColor":"#b3cde3",
+          "weight": 1,
+          "fillOpacity": 1
+        };
+      } else if (percent <= 53) {
+        return {
+          "fillColor":"#8c96c6",
+          "weight": 1,
+          "fillOpacity": 1
+        };
+      } else if (percent <= 73) {
+        return {
+          "fillColor":"#8856a7",
+          "weight": 1,
+          "fillOpacity": 1
+        };
+      } else if (percent > 73){
+        return {
+          "fillColor": "#810f7c",
+          "weight": 1,
+          "fillOpacity": 1
+        }
+      }
+
+
     }
 
+
     }).bindPopup(function (layer) {
-        return layer.feature.properties.PlanSelec;
+        var numer = layer.feature.properties.PlanSelec;
+        var county = layer.feature.properties.NAME_LOCAS;
+        var denom = layer.feature.properties.EligibleFo;
+        var percent = numer/denom;
+        percent = Math.round(percent * 100);
+        if(percent > 90){
+          percent = "> 90";
+        }
+        percent = county + "<br>" + percent + " percent";
+
+        console.log(numer);
+        console.log(denom);
+
+        return "<h5>" + percent + "</h5>";
+
+
+
 
     }).addTo(map);
 
 
-
+  console.log(min);
 
       // Disable drag and zoom handlers.
-      map.dragging.disable();
+      // map.dragging.disable();
       map.touchZoom.disable();
       map.doubleClickZoom.disable();
       map.scrollWheelZoom.disable();
